@@ -5,8 +5,19 @@
   <title>ピタッとワード</title>
   <style>
     body { font-family: sans-serif; text-align: center; margin: 2em; }
-    .word { font-size: 2em; letter-spacing: .3em; }
-    .hint { margin: 1em 0; }
+    .word { font-size: 2em; letter-spacing: .3em; position: relative; }
+    .char { display: inline-block; width: 2em; text-align: center; position: relative; }
+    .arrow {
+      position: absolute;
+      white-space: nowrap;
+      font-size: 1em;
+      color: #333;
+      text-align: left;
+    }
+    .label {
+      font-size: 0.9em;
+      margin-left: 1.2em;
+    }
     input { padding: .5em; font-size: 1.2em; }
     button { padding: .5em 1em; font-size: 1.2em; margin-left: .5em; }
     #result { margin-top: 1em; font-size: 1.5em; font-weight: bold; }
@@ -16,7 +27,7 @@
   <h1>ピタッとワード</h1>
   <div id="question">
     <div class="word" id="blank"></div>
-    <div class="hint" id="hints"></div>
+    <div id="arrows"></div>
   </div>
 
   <input id="answer" placeholder="答えを入力">
