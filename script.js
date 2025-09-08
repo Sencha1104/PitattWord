@@ -20,12 +20,44 @@ function nextProblem() {
   document.getElementById("result").textContent = "";
   document.getElementById("answer").value = "";
   current = problems[Math.floor(Math.random() * problems.length)];
-  // ○表示
-  document.getElementById("blank").textContent = "○".repeat(current.word.length);
-  // ヒント表示
-  document.getElementById("hints").innerHTML = current.parts
-    .map(p => `${p.start}-${p.end}: ${p.genre}`)
-    .join("<br>");
+
+  const blank = document.getElementById("blank");
+  blank.innerHTML = "";
+
+  // ○を文字ごとに表示
+  for (let i = 0; i < current.word.length; i++) {
+    const span = document.createElement("span");
+    span.textContent = "○";
+    span.className = "char";
+    span.id = `char-${i + 1}`; // 1始まり
+    blank.appendChild(span);
+  }
+
+  // 矢印を描画
+  const arrowsDiv = document.getElementById("arrows");
+  arrowsDiv.innerHTML = "";
+
+  current.parts.forEach((p, idx) => {
+    const startEl = document.getElementById(`char-${p.start}`);
+    if (!startEl) return;
+
+    const rect = startEl.getBoundingClientRect();
+    const parentRect = blank.getBoundingClientRect();
+
+    // 矢印 + ラベル
+    const arrow = document.createElement("div");
+    arrow.className = "arrow";
+    arrow.innerHTML = `└─→<div class="label">${p.genre}</div>`;
+
+    // 左端の位置に配置
+    const left = rect.left - parentRect.left;
+    const top = rect.bottom - parentRect.top + (idx * 40) + 10;
+
+    arrow.style.left = left + "px";
+    arrow.style.top = top + "px";
+
+    arrowsDiv.appendChild(arrow);
+  });
 }
 
 function checkAnswer() {
