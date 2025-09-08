@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>ピタッとワード</title>
+  <style>
+    body { font-family: sans-serif; text-align: center; margin: 2em; }
+    .word { font-size: 2em; letter-spacing: .3em; }
+    .hint { margin: 1em 0; }
+    input { padding: .5em; font-size: 1.2em; }
+    button { padding: .5em 1em; font-size: 1.2em; margin-left: .5em; }
+    #result { margin-top: 1em; font-size: 1.5em; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>ピタッとワード</h1>
+  <div id="question">
+    <div class="word" id="blank"></div>
+    <div class="hint" id="hints"></div>
+  </div>
+
+  <input id="answer" placeholder="答えを入力">
+  <button onclick="checkAnswer()">決定</button>
+
+  <div id="result"></div>
+  <button onclick="nextProblem()">次の問題へ</button>
+
+  <script src="script.js"></script>
+</body>
+</html>
